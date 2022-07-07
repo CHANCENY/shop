@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: 12pt &quot;Arial&quot;;
-background-color: rgb(51, 51, 85);
+background-color: white;
 color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QGroupBox" name="groupBox">

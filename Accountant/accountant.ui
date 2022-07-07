@@ -14,8 +14,8 @@
    <string>shopk</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color:white;
-background-color: rgb(102, 102, 102);
+   <string notr="true">color:black;
+background-color: white;
 border-radius:5px;
 font: 12pt &quot;Arial&quot;;</string>
   </property>
@@ -108,6 +108,9 @@ font: 10pt &quot;Arial&quot;;</string>
       <height>111</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">border:1px solid  beige;</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -174,7 +177,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>hanna shopping mall</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="balancelabel">
@@ -187,7 +190,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>$ 90000.98</string>
+      <string/>
      </property>
     </widget>
    </widget>
@@ -234,7 +237,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -263,7 +266,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -292,7 +295,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -321,7 +324,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="value">
-      <number>24</number>
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -557,7 +560,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Sugar</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_18">
@@ -583,7 +586,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>$ 1000</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_20">
@@ -622,7 +625,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Soap</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_23">
@@ -648,7 +651,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>$ 200</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_25">
@@ -687,7 +690,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>Car honda</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_28">
@@ -713,7 +716,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>$ 120</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label">
@@ -739,7 +742,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>0</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
@@ -765,7 +768,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>0</string>
+      <string/>
      </property>
     </widget>
     <widget class="QLabel" name="label_31">
@@ -791,7 +794,7 @@ font: 10pt &quot;Arial&quot;;</string>
       </rect>
      </property>
      <property name="text">
-      <string>0</string>
+      <string/>
      </property>
     </widget>
    </widget>

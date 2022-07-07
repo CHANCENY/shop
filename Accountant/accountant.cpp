@@ -426,6 +426,7 @@ void Accountant::itemupdatelocal()
 
            QStringList rowss = allinfo[2].split(';');
            int sizess = rowss.size();
+           qDebug()<<"Rmoney "<<rowss;
 
            if(releasemoneycon())
            {
@@ -574,4 +575,5 @@ void Accountant::on_todaybutton_2_clicked()
     rep = new report(this);
     rep->show();
 }
+
 

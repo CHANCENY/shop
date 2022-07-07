@@ -24,6 +24,7 @@ Adminpage::Adminpage(QWidget *parent) :
     ui->setupUi(this);
     ui->lineEdit_2->setVisible(false);
     ui->pushButton_5->setText("Withdraw");
+    ui->lineEdit_3->setVisible(false);
     admininfo();
     getEmployeesUpdateFromServer();
     checkBookIfExist();
@@ -265,7 +266,7 @@ void Adminpage::localupdateemployees()
                        QStringList col = rowss[i].split('@');
 
                        QSqlQuery query;
-                       query.prepare("INSERT INTO Rmoney(code,verified,amount,description,expire,exp,ReleasedBy,ExpectedAmount,AdminAuth) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"');");
+                       query.prepare("INSERT INTO Rmoney(code,verified,amount,description,expire,exp,ReleasedBy,ExpectedAmount,AdminAuth,Date) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"','"+col[9]+"');");
                        if(query.exec())
                        {
                            continue;
@@ -336,7 +337,9 @@ void Adminpage::timing()
     QDateTime t = QDateTime::currentDateTime();
     QString time = t.toString("h:m");
 
-     ui->expiremessage->setText("Time: "+time+" Expiring: "+expiretime);
+     ui->expiremessage->setText(" Time: "+time+" Expiring: "+expiretime);
+      ui->lineEdit_3->setVisible(true);
+     ui->lineEdit_3->setText(codemade);
 
     if(time == expiretime)
     {
@@ -361,12 +364,14 @@ void Adminpage::timing()
                 QByteArray data; data.append(line2.toStdString());
                 sock.SendingToServer(data);
                ui->expiremessage->setText("Time: "+time+" Expiring: "+expiretime+" has expired unsed");
+                ui->lineEdit_3->setVisible(false);
                checkbooktimer->stop();
 
             }
             else
             {
                  ui->expiremessage->setText("Time: "+time+" Expiring: "+expiretime+" has expired used");
+                  ui->lineEdit_3->setVisible(false);
                  checkbooktimer->stop();
             }
         }

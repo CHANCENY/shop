@@ -27,8 +27,8 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(34, 34, 34);
-color: rgb(255, 255, 255);</string>
+     <string notr="true">background-color: floralwhite;
+color: black;</string>
     </property>
     <property name="title">
      <string>Item complete sold out </string>
@@ -87,7 +87,8 @@ font: italic 11pt &quot;Arial&quot;;</string>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(34, 34, 51);</string>
+     <string notr="true">background-color: floralwhite;
+color: black;</string>
     </property>
     <property name="title">
      <string>Totals</string>
