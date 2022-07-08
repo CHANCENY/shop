@@ -19,6 +19,7 @@ class login : public QMainWindow
 public:
     login(QWidget *parent = nullptr);
     ~login();
+
     void clearuser(QString line);
 
 public slots:

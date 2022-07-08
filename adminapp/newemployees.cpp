@@ -1,5 +1,6 @@
 #include "newemployees.h"
 #include "ui_newemployees.h"
+
 #include <QMessageBox>
 
 
@@ -42,6 +43,20 @@ bool newEmployees::checkUsername(QString username)
     return true;
 }
 
+bool newEmployees::firstTime(QString line)
+{
+    if(employdbcon())
+    {
+        QSqlQuery query;
+        query.prepare("INSERT INTO employees(username) VALUES('"+line+"');");
+        if(query.exec())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 void newEmployees::result()
 {
     QDir dir2;
@@ -60,6 +75,7 @@ void newEmployees::result()
     if(line == "true")
     {
       QMessageBox::information(this,"Account Creation","You have successfully created account");
+
     }
     else
     {

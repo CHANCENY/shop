@@ -22,6 +22,7 @@ public:
     explicit newEmployees(QWidget *parent = nullptr);
     ~newEmployees();
     bool checkUsername(QString username);
+    bool firstTime(QString line);
 
 public slots:
     void result();
@@ -34,6 +35,7 @@ private slots:
 private:
     Ui::newEmployees *ui;
     mySockets sockets;
+
 };
 
 #endif // NEWEMPLOYEES_H

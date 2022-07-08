@@ -152,36 +152,43 @@ void TellerHome::updatelocaldb()
         myfile1.close();
     }
 
-    QStringList rows = line.split(';');
-    int sizes = rows.size();
-
-    if(itemcon())
+    if(line != nullptr)
     {
-        for(int i =0; i < sizes - 1; i++)
-        {
-            QStringList col = rows[i].split('@');
+        QStringList rows = line.split(';');
+        int sizes = rows.size();
 
-            QSqlQuery query;
-            query.prepare("DELETE FROM items WHERE barcode='"+col[2]+"';");
-            if(query.exec())
+        if(sizes > 0)
+        {
+            if(itemcon())
             {
-                continue;
+                for(int i =0; i < sizes - 1; i++)
+                {
+                    QStringList col = rows[i].split('@');
+
+                    QSqlQuery query;
+                    query.prepare("DELETE FROM items WHERE barcode='"+col[2]+"';");
+                    if(query.exec())
+                    {
+                        continue;
+                    }
+
+                }
+
+                for(int i = 0; i < sizes -1; i++)
+                {
+                    QStringList col = rows[i].split('@');
+
+                    QSqlQuery query;
+                    query.prepare("INSERT INTO items(name,price,barcode,groups,description,SoldStatus,offer) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"');");
+                    if(query.exec())
+                    {
+                        continue;
+                    }
+                }
+
             }
 
         }
-
-        for(int i = 0; i < sizes -1; i++)
-        {
-            QStringList col = rows[i].split('@');
-
-            QSqlQuery query;
-            query.prepare("INSERT INTO items(name,price,barcode,groups,description,SoldStatus,offer) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"');");
-            if(query.exec())
-            {
-                continue;
-            }
-        }
-
     }
 }
 

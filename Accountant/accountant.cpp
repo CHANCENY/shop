@@ -355,111 +355,127 @@ void Accountant::itemupdatelocal()
 
         if(line != nullptr)
         {
-            QStringList allinfo = line.split('#');
-            QStringList rows = allinfo[0].split(';');
-            int sizes = rows.size();
-
-            if(itemdbcon())
+            if(line != "##")
             {
-                for(int i =0; i < sizes - 1; i++)
-                {
-                    QStringList col = rows[i].split('@');
-
-                    QSqlQuery query;
-                    query.prepare("DELETE FROM items WHERE barcode='"+col[2]+"';");
-                    if(query.exec())
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        break;
-                    }
-
-                }
-
-                for(int i = 0; i < sizes -1; i++)
-                {
-                    QStringList col = rows[i].split('@');
-
-                    QSqlQuery query;
-                    query.prepare("INSERT INTO items(name,price,barcode,groups,description,SoldStatus,offer,datesold,soldprice) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"');");
-                    if(query.exec())
-                    {
-                        continue;
-                    }
-                }
-            }
-
-           QStringList bank = allinfo[1].split('@');
-           qDebug()<<"bank ->"<<bank;
-
-           if(bookcon())
-           {
-               QSqlQuery query;
-               QString lin = nullptr;
-
-                   query.prepare("SELECT * FROM book WHERE booknumber='"+bank[2]+"';");
-                   if(query.exec())
+                QStringList allinfo = line.split('#');
+                QStringList rows = allinfo[0].split(';');
+                int sizes = rows.size();
+               if(!rows.isEmpty())
+               {
+                   if(itemdbcon())
                    {
-
-                       while(query.next())
+                       for(int i =0; i < sizes - 1; i++)
                        {
-                          lin = query.value(2).toString();
+                           QStringList col = rows[i].split('@');
+
+                           QSqlQuery query;
+                           query.prepare("DELETE FROM items WHERE barcode='"+col[2]+"';");
+                           if(query.exec())
+                           {
+                               continue;
+                           }
+                           else
+                           {
+                               break;
+                           }
+
+                       }
+
+                       for(int i = 0; i < sizes -1; i++)
+                       {
+                           QStringList col = rows[i].split('@');
+
+                           QSqlQuery query;
+                           query.prepare("INSERT INTO items(name,price,barcode,groups,description,SoldStatus,offer,datesold,soldprice) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"');");
+                           if(query.exec())
+                           {
+                               continue;
+                           }
+                       }
+                   }
+               }
+
+               QStringList bank = allinfo[1].split('@');
+               qDebug()<<"bank ->"<<bank;
+
+               if(bank.size() > 1)
+               {
+                   qDebug()<<"inside bank";
+                   if(bookcon())
+                   {
+                       QSqlQuery query;
+                       QString lin = nullptr;
+
+                           query.prepare("SELECT * FROM book WHERE booknumber='"+bank[2]+"';");
+                           if(query.exec())
+                           {
+
+                               while(query.next())
+                               {
+                                  lin = query.value(2).toString();
+                               }
+                           }
+
+                           if(lin == nullptr)
+                           {
+                             query.prepare("INSERT INTO book VALUES('"+bank[0]+"','"+bank[1]+"','"+bank[2]+"');");
+                             query.exec();
+                           }
+                           else
+                           {
+                               query.prepare("UPDATE book SET bookbalance ='"+bank[1]+"' WHERE booknumber='"+bank[2]+"';");
+                               query.exec();
+                           }
+                   }
+
+
+               }
+
+
+
+               QStringList rowss = allinfo[2].split(';');
+               int sizess = rowss.size();
+               qDebug()<<"Rmoney "<<rowss;
+
+               if(rowss.size() > 1)
+               {
+                    qDebug()<<"inside Rmoney";
+                   if(releasemoneycon())
+                   {
+                       for(int i =0; i < sizess - 1; i++)
+                       {
+                           QStringList col = rowss[i].split('@');
+
+                           QSqlQuery query;
+                           query.prepare("DELETE FROM Rmoney WHERE code='"+col[0]+"';");
+                           if(query.exec())
+                           {
+                               continue;
+                           }
+                           else
+                           {
+                               break;
+                           }
+
+                       }
+
+                       for(int i = 0; i < sizess -1; i++)
+                       {
+                           QStringList col = rowss[i].split('@');
+
+                           QSqlQuery query;
+                           query.prepare("INSERT INTO Rmoney(code,verified,amount,description,expire,exp,ReleasedBy,ExpectedAmount,AdminAuth,Date) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"','"+col[9]+"');");
+                           if(query.exec())
+                           {
+                               continue;
+                           }
                        }
                    }
 
-                   if(lin == nullptr)
-                   {
-                     query.prepare("INSERT INTO book VALUES('"+bank[0]+"','"+bank[1]+"','"+bank[2]+"');");
-                     query.exec();
-                   }
-                   else
-                   {
-                       query.prepare("UPDATE book SET bookbalance ='"+bank[1]+"' WHERE booknumber='"+bank[2]+"';");
-                       query.exec();
-                   }
-           }
-
-
-
-
-           QStringList rowss = allinfo[2].split(';');
-           int sizess = rowss.size();
-           qDebug()<<"Rmoney "<<rowss;
-
-           if(releasemoneycon())
-           {
-               for(int i =0; i < sizess - 1; i++)
-               {
-                   QStringList col = rowss[i].split('@');
-
-                   QSqlQuery query;
-                   query.prepare("DELETE FROM Rmoney WHERE code='"+col[0]+"';");
-                   if(query.exec())
-                   {
-                       continue;
-                   }
-                   else
-                   {
-                       break;
-                   }
 
                }
 
-               for(int i = 0; i < sizess -1; i++)
-               {
-                   QStringList col = rowss[i].split('@');
-
-                   QSqlQuery query;
-                   query.prepare("INSERT INTO Rmoney(code,verified,amount,description,expire,exp,ReleasedBy,ExpectedAmount,AdminAuth,Date) VALUES('"+col[0]+"','"+col[1]+"','"+col[2]+"','"+col[3]+"','"+col[4]+"','"+col[5]+"','"+col[6]+"','"+col[7]+"','"+col[8]+"','"+col[9]+"');");
-                   if(query.exec())
-                   {
-                       continue;
-                   }
-               }
-           }
-
+            }
 
         }
 
