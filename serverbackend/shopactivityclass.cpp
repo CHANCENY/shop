@@ -51,8 +51,7 @@ QByteArray shopActivityClass::sellingupdate(QString line)
        int sizes = codes.size() - 1;
        int counter = 0;
 
-       qDebug()<<codes;
-       qDebug()<<prices;
+
 
        if(itemsdb())
        {
@@ -244,7 +243,7 @@ QByteArray shopActivityClass::savingiteminshop(QString line)
       if(query.exec())
       {
           QString line = nullptr;
-          qDebug()<<"here reaced 1";
+
           while(query.next())
           {
             line = query.value(0).toString();
@@ -252,7 +251,7 @@ QByteArray shopActivityClass::savingiteminshop(QString line)
 
           if(line == nullptr)
           {
-              qDebug()<<"here reaced 3";
+
               query.prepare("INSERT INTO items(name,price,barcode,groups,description,SoldStatus,offer) VALUES('"+item.at(0)+"','"+item.at(1)+"','"+item.at(2)+"','"+item.at(3)+"','"+item.at(4)+"','Unsold','"+offers+"');");
               if(query.exec())
               {

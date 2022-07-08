@@ -2,7 +2,7 @@
 
 validateuser::validateuser()
 {
-
+  qDebug()<<"Validating User Employee";
 }
 
 QByteArray validateuser::loginuser(QString username, QString password)

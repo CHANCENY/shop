@@ -15,7 +15,7 @@ QString myServer::startServer()
     }
     else
     {
-          qDebug()<<"server listening ....";
+          qDebug()<<"----SERVER LISTENING------";
           return "true";
     }
      return nullptr;
@@ -30,6 +30,6 @@ void myServer::incomingConnection(qintptr handle)
        myClient *client = new myClient(this);
        client->setSocket(handle);
 
-       qDebug()<<handle<<" connection is attempting to connect....";
+       qDebug()<<handle<<" connection established successfully....";
 }
 

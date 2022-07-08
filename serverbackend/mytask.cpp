@@ -136,7 +136,7 @@ void mytask::DecisionPath()
 
 void mytask::run()
 {
-    qDebug()<<"task has started.....";
+    qDebug()<<"Task has started.....";
 
     // to processing request
        TaskGivenFile();
@@ -145,7 +145,7 @@ void mytask::run()
        // after processing request and sending feedback
 
       QByteArray data = Sending();
-       qDebug()<<"task done....";
-       qDebug()<<"sending......"<<data;
+       qDebug()<<"Task done....";
+       qDebug()<<"Sending result......";
        emit Result(data);
 }

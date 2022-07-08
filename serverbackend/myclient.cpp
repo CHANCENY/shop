@@ -18,7 +18,7 @@ void myClient::setSocket(int descriptor)
 
        socket->setSocketDescriptor(descriptor);
 
-       qDebug()<<descriptor <<" connected...";
+       qDebug()<<descriptor <<" connected";
 }
 
 bool myClient::WriteToFileRecievedData(QByteArray arry)
@@ -45,7 +45,7 @@ void myClient::connected()
 
 void myClient::disconnected()
 {
-     qDebug()<<" disconnected...";
+     qDebug()<<" Disconnected...";
 }
 
 void myClient::readyRead()
@@ -60,6 +60,7 @@ void myClient::readyRead()
 
           if(OKWritten)
           {
+           qDebug()<<"Data Arrived successfully .....";
            mytask *task = new mytask();
           task->setAutoDelete(true);
           connect(task,SIGNAL(Result(QByteArray)),this,SLOT(taskResult(QByteArray)),Qt::QueuedConnection);

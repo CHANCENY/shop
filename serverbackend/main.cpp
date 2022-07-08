@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     myServer server;
-    qDebug()<<server.startServer();
+    server.startServer();
 
     return a.exec();
 }

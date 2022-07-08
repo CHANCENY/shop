@@ -2,7 +2,7 @@
 
 AdminClass::AdminClass()
 {
-
+   qDebug()<<"Admin accessing database .....";
 }
 
 QByteArray AdminClass::employeesTable(QString line)
@@ -115,6 +115,7 @@ QByteArray AdminClass::createBook(QString name, QString number)
                      QString l = "true,"+line;
                      QByteArray data;
                      data.append(l.toStdString());
+                     qDebug()<<"Admin accessing database finished.....";
                      return data;
                    }
                }
@@ -136,6 +137,7 @@ QByteArray AdminClass::changeUserInfo(QString obj)
            query.prepare("UPDATE employees SET name='"+list[0]+"', username='"+list[1]+"', title='"+list[2]+"', password='"+list[3]+"', photo='"+list[4]+"' WHERE  username ='"+list[1]+"';");
            if(query.exec())
            {
+               qDebug()<<"Admin accessing database finished.....";
                return "true";
            }
        }
@@ -158,6 +160,7 @@ QByteArray AdminClass::deleteUser(QString username, QString password)
                   query.prepare("DELETE FROM employees WHERE username ='"+username+"' AND password ='"+password+"';");
                   if(query.exec())
                   {
+                      qDebug()<<"Admin accessing database finished.....";
                       return "true";
                   }
               }
@@ -175,6 +178,7 @@ QByteArray AdminClass::creatingAccountUser(QString name, QString username, QStri
        query.prepare("INSERT INTO employees VALUES('"+name+"','"+username+"','"+title+"','"+password+"','"+photo+"');");
        if(query.exec())
        {
+           qDebug()<<"Admin accessing database finished.....";
            return "true";
        }
    }
@@ -189,6 +193,7 @@ QByteArray AdminClass::releasingMoneyAuth(QString code, QString verified, QStrin
       query.prepare("INSERT INTO Rmoney(code,verified,expire,exp,ExpectedAmount,AdminAuth) VALUES('"+code+"','"+verified+"','"+expire+"','"+exp+"','"+amountex+"','"+admin+"');");
       if(query.exec())
       {
+          qDebug()<<"Admin accessing database finished.....";
           return "true";
       }
   }
@@ -205,6 +210,7 @@ QByteArray AdminClass::expiringcode(QString line)
         query.prepare(line);
         if(query.exec())
         {
+            qDebug()<<"Admin accessing database finished.....";
             return "true";
         }
     }
