@@ -13,17 +13,20 @@ SOURCES += \
     main.cpp \
     login.cpp\
     mysockets.cpp \
-    tellerhome.cpp
+    tellerhome.cpp\
+    settings.cpp
 
 HEADERS += \
     dbcon.h \
     login.h\
     mysockets.h \
-    tellerhome.h
+    tellerhome.h\
+    settings.h
 
 FORMS += \
     login.ui \
-    tellerhome.ui
+    tellerhome.ui\
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,29 +1,47 @@
 #include "login.h"
 #include "newemployees.h"
+#include "settings.h"
 #include <QtSql>
+#include <QFile>
+#include <QDir>
+#include <QTextStream>
 
 #include <QApplication>
 
 bool checkAdmin();
+
+bool checkIpConfig();
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     login w;
     newEmployees ww;
+    settings www;
 
-    bool ok = checkAdmin();
+    bool ipconfig = checkIpConfig();
 
-    if(ok == true)
+    if(ipconfig == true)
     {
-        w.show();
-        return a.exec();
+        bool ok = checkAdmin();
+
+        if(ok == true)
+        {
+            w.show();
+            return a.exec();
+        }
+        else
+        {
+            ww.firstTime("newnow");
+            ww.show();
+            return a.exec();
+        }
+
     }
     else
     {
-        ww.firstTime("newnow");
-        ww.show();
-        return a.exec();
+      www.show();
+      return a.exec();
     }
 
 }
@@ -54,4 +72,24 @@ bool checkAdmin()
     }
 
     return false;
+}
+
+
+bool checkIpConfig()
+{
+   QDir dir; QString filename = dir.absoluteFilePath("ConfigNetwork");
+
+   QFile myfile(filename);
+   myfile.open(QIODevice::ReadOnly);
+   if(myfile.isOpen())
+   {
+       QTextStream in(&myfile);
+       QString line = in.readAll();
+
+       if(line != nullptr)
+       {
+           return true;
+       }
+   }
+   return false;
 }

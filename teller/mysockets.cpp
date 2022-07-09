@@ -14,7 +14,12 @@ void mySockets::SendingToServer(QByteArray data)
 {
     qDebug()<<"connecting ....";
     qDebug()<<" About Send ..."<<data;
-    socket->connectToHost("127.0.0.1",8888);
+
+
+    QStringList IpPort = ReadIpAddress().split('@');
+
+    socket->connectToHost(IpPort.at(0),IpPort.last().toInt());
+
     if(!socket->waitForConnected(3000))
     {
         return;
@@ -43,6 +48,25 @@ void mySockets::WriteToFile(QByteArray array)
         myfile.flush();
         myfile.close();
     }
+}
+
+QString mySockets:: ReadIpAddress()
+{
+    QDir dir; QString filename = dir.absoluteFilePath("ConfigNetwork");
+
+    QFile myfile(filename);
+    myfile.open(QIODevice::ReadOnly);
+    if(myfile.isOpen())
+    {
+        QTextStream in(&myfile);
+        QString line = in.readAll();
+
+        if(line != nullptr)
+        {
+            return line;
+        }
+    }
+    return nullptr;
 }
 
 

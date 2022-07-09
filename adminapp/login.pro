@@ -16,7 +16,8 @@ SOURCES += \
     main.cpp \
     login.cpp\
     mysockets.cpp \
-    newemployees.cpp
+    newemployees.cpp\
+    settings.cpp
 
 HEADERS += \
     adminedit.h \
@@ -25,14 +26,16 @@ HEADERS += \
     databases.h \
     login.h\
     mysockets.h \
-    newemployees.h
+    newemployees.h\
+    settings.h
 
 FORMS += \
     adminedit.ui \
     adminpage.ui \
     bookmaker.ui \
     login.ui \
-    newemployees.ui
+    newemployees.ui\
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

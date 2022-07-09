@@ -17,6 +17,7 @@ public:
     //void startSocket();
     void SendingToServer(QByteArray data);
     void WriteToFile(QByteArray array);
+    QString ReadIpAddress();
 
     // login page functions
 

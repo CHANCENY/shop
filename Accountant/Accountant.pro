@@ -18,7 +18,8 @@ SOURCES += \
     soldcheckpage.cpp\
     stockwindow.cpp\
     report.cpp\
-    search.cpp
+    search.cpp\
+    settings.cpp
 
 
 HEADERS += \
@@ -30,7 +31,8 @@ HEADERS += \
     soldcheckpage.h\
     stockwindow.h\
     report.h\
-    search.h
+    search.h\
+    settings.h
 
 FORMS += \
     login.ui\
@@ -39,7 +41,8 @@ FORMS += \
     soldcheckpage.ui\
     stockwindow.ui\
     report.ui\
-    search.ui
+    search.ui\
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
