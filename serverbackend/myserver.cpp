@@ -8,18 +8,35 @@ myServer::myServer(QObject *parent) :  QTcpServer(parent)
 QString myServer::startServer()
 {
 
-    if(!this->listen(QHostAddress::Any,8888))
+    int port = portFinder().toInt();
+
+    if(!this->listen(QHostAddress::Any,port))
     {
         qDebug()<<"server not listening ....";
         return nullptr;
     }
     else
     {
-          qDebug()<<"----SERVER LISTENING------";
+          qDebug()<<"----SERVER LISTENING AT PORT "<<port;
           return "true";
     }
      return nullptr;
 
+}
+
+QString myServer::portFinder()
+{
+  QDir dir;
+  QString filename = dir.absoluteFilePath("PORT");
+
+  QFile myfile(filename);
+  myfile.open(QIODevice::ReadOnly);
+  if(myfile.isOpen())
+  {
+      QTextStream in(&myfile);
+      return in.readAll();
+  }
+  return nullptr;
 }
 
 void myServer::incomingConnection(qintptr handle)

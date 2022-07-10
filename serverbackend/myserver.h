@@ -5,6 +5,9 @@
 #include <QObject>
 #include <QString>
 #include "myclient.h"
+#include <QFile>
+#include <QTextStream>
+#include <QDir>
 
 
 class myServer : public QTcpServer
@@ -13,6 +16,7 @@ class myServer : public QTcpServer
 public:
     explicit myServer(QObject *parent = 0);
        QString startServer();
+       QString portFinder();
 
 protected:
     void incomingConnection(qintptr handle);
