@@ -18,6 +18,8 @@ public:
     QByteArray creatingAccountUser(QString name, QString username, QString title, QString password, QString photo);
     QByteArray releasingMoneyAuth(QString code, QString verified, QString expire, QString exp, QString amountex, QString admin);
     QByteArray expiringcode(QString line);
+
+    QByteArray addingprofilepicture(QString picture, QString username);
 };
 
 #endif // ADMINCLASS_H

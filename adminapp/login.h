@@ -24,6 +24,7 @@ public:
 
 public slots:
     void validateuser();
+    void lockTimer();
 
 private slots:
     void on_pushButton_clicked();

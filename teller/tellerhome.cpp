@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QMessageBox>
+#include <QFileDialog>
 
  QString endtime = nullptr;
 
@@ -11,6 +12,11 @@
  QStringList cart;
  QString currentTextbarcode = nullptr;
  QString currentitemincart = nullptr;
+
+
+
+QString usernameloggedin = nullptr;
+
 
 TellerHome::TellerHome(QWidget *parent) :
     QMainWindow(parent),
@@ -78,8 +84,8 @@ void TellerHome::setTellerInfo()
 
         ui->name->setText(list[1]);
         ui->title->setText(list.at(3));
-
-        QPixmap profile(list.last());
+        usernameloggedin = list[2];
+        QPixmap profile(setPicture(list[2]));
         ui->profile->setPixmap(profile);
     }
 }
@@ -103,6 +109,26 @@ void TellerHome::deleteitems()
            }
         }
     }
+}
+
+QString TellerHome::setPicture(QString username)
+{
+   if(saverusercon())
+   {
+       QString line = nullptr;
+       QSqlQuery query;
+       query.prepare("SELECT * FROM log WHERE username ='"+username+"';");
+       if(query.exec())
+       {
+           while(query.next())
+           {
+             line = query.value(2).toString();
+           }
+       }
+
+       return line;
+   }
+   return "none";
 }
 
 void TellerHome::clockingout()
@@ -375,5 +401,23 @@ void TellerHome::on_pushButton_clicked()
         ui->lineEdit->clear();
 
     }
+}
+
+
+void TellerHome::on_addprofile_clicked()
+{
+  QString filename = QFileDialog::getOpenFileName(this,"Choice photo",QDir::homePath(),"*.jpg *.jpeg *.png");
+  if(filename != nullptr)
+  {
+      if(saverusercon())
+      {
+          QSqlQuery query; query.prepare("UPDATE log SET profile='"+filename+"' WHERE username='"+usernameloggedin+"';");
+          if(query.exec())
+          {
+              QPixmap pro(filename);
+              ui->profile->setPixmap(pro);
+          }
+      }
+  }
 }
 

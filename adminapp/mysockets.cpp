@@ -11,7 +11,7 @@ mySockets::mySockets(QObject *parent) : QTcpSocket(parent)
 void mySockets::SendingToServer(QByteArray data)
 {
     qDebug()<<"connecting ....";
-    qDebug()<<" About Send ..."<<data;
+
 
     //the connection ip address should be of computer where server is running
     QStringList IpPort = ReadIpAddress().split('@');
@@ -22,7 +22,7 @@ void mySockets::SendingToServer(QByteArray data)
     }
     else
     {
-        qDebug()<<"Sending ..."<<data;
+        qDebug()<<"Sending ...";
         socket->write(data);
         socket->flush();
         socket->waitForBytesWritten();
@@ -70,7 +70,7 @@ void mySockets::readyRead()
 {
     QByteArray receivedData;
     receivedData = socket->readAll();
-     qDebug()<<"RECEIVED FROM SERVER : "<<receivedData;
+     qDebug()<<"Response arrieved.... ";
     WriteToFile(receivedData);
     socket->close();
 

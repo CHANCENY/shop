@@ -7,11 +7,14 @@
 
 QTimer *check;
 
+QString usernamelogged = nullptr;
+
 Accountant::Accountant(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Accountant)
 {
     ui->setupUi(this);
+
     setAccountantInfo();
 
     accountbook();
@@ -35,8 +38,25 @@ Accountant::~Accountant()
 
 void Accountant::setAccountantInfo()
 {
+    QDir dir2;
+    QString filename2 = dir2.absoluteFilePath("RECEIVEDDATA");
+
+    QFile myfile2(filename2);
+    myfile2.open(QIODevice::ReadOnly);
+    if(myfile2.isOpen())
+    {
+        QTextStream in(&myfile2);
+        QString line = in.readAll();
+        QStringList info = line.split(',');
+        ui->fullname->setText(info.at(1));
+        myfile2.close();
+
+    }
+
+
+
   QDir dir;
-  QString filename = dir.absoluteFilePath("RECEIVEDDATA");
+  QString filename = dir.absoluteFilePath("LOCK");
 
   QFile myfile(filename);
   myfile.open(QIODevice::ReadOnly);
@@ -44,24 +64,44 @@ void Accountant::setAccountantInfo()
   {
       QTextStream in(&myfile);
       QString line = in.readAll();
+      myfile.close();
 
       if(line != nullptr)
       {
-          QStringList info = line.split(',');
-          ui->fullname->setText(info.at(1));
+          usernamelogged = line;
+         if(savedusercon())
+         {
+              QString photo = nullptr;
+             QSqlQuery query;
+             query.prepare("select * from log where username='"+line+"';");
+             if(query.exec())
+             {
 
-          QPixmap pro(info.last());
-          ui->profile->setPixmap(pro);
+                 while(query.next())
+                 {
+                   photo = query.value(2).toString();
+                 }
+             }
+
+             if(photo != nullptr)
+             {
+               // QStringList info = line.split(',');
+                 //ui->fullname->setText(info.at(1));
+
+                 QPixmap pro(photo);
+                 ui->profile->setPixmap(pro);
+             }
+         }
 
           QDate date = QDate::currentDate();
           QString dates = date.toString("dd-MM-yy");
 
           ui->datesplace->setText(dates);
 
-
-
       }
   }
+
+
 }
 
 void Accountant::checkmonthlyrate()
@@ -219,6 +259,23 @@ void Accountant::checktody()
   int pernce = totals / 100;
 
   ui->todays->setValue(pernce);
+}
+
+QString Accountant::setProfilephoto()
+{
+    if(savedusercon())
+    {
+        QSqlQuery query;
+        query.prepare("SELECT * FROM log WHERE username= '"+usernamelogged+"';");
+        if(query.exec())
+        {
+            while(query.next())
+            {
+                return query.value(2).toString();
+
+            }
+        }
+    }
 }
 
 void Accountant::accountbook()
@@ -592,4 +649,23 @@ void Accountant::on_todaybutton_2_clicked()
     rep->show();
 }
 
+
+
+void Accountant::on_addprofile_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,"choose photo",QDir::homePath(),"*.jpg *.jpeg *.png");
+    if(filename != nullptr)
+    {
+        if(savedusercon())
+        {
+          QSqlQuery query;
+          query.prepare("UPDATE log SET profile ='"+filename+"' WHERE username ='"+usernamelogged+"';");
+          if(query.exec())
+          {
+              QPixmap pro(filename);
+              ui->profile->setPixmap(pro);
+          }
+        }
+    }
+}
 

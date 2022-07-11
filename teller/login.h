@@ -12,7 +12,7 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Login; }
 QT_END_NAMESPACE
 
-class Login : public QMainWindow
+class Login : public QMainWindow, public DBCon
 {
     Q_OBJECT
 
@@ -21,6 +21,7 @@ public:
     ~Login();
 
     void logInNow(QString username, QString passwrd);
+     void saveuser(QString username, QString password);
     void saveduserfound(QString line);
 
 

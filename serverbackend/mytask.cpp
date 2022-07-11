@@ -131,6 +131,11 @@ void mytask::DecisionPath()
     {
         PassDataTosend(expiringcode(list[1]));
     }
+    if(action == "addpicture")
+    {
+        qDebug()<<list[1]<<list.last();
+        PassDataTosend(addingprofilepicture(list[1],list.last()));
+    }
 
 }
 

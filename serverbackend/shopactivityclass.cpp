@@ -3,7 +3,7 @@
 
 shopActivityClass::shopActivityClass()
 {
-
+  qDebug()<<"Accountants and tellers accessed....";
 }
 
 QByteArray shopActivityClass::collectAvaiableItems(QString line)

@@ -216,3 +216,18 @@ QByteArray AdminClass::expiringcode(QString line)
     }
     return "false";
 }
+
+QByteArray AdminClass::addingprofilepicture(QString picture, QString username)
+{
+    if(emmployeescon())
+    {
+        QSqlQuery query;
+        query.prepare("UPDATE employees SET photo='"+picture+"' WHERE username ='"+username+"';");
+        if(query.exec())
+        {
+            qDebug()<<"Admin accessing database finished.....";
+            return "true";
+        }
+    }
+    return "false";
+}

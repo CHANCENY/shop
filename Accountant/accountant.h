@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QFile>
 #include <QTextStream>
+#include <QFileDialog>
 #include <QtSql>
 #include <QDir>
 #include <QString>
@@ -31,6 +32,7 @@ public:
     void checktwoweeks();
     void checkweek();
     void checktody();
+    QString setProfilephoto();
 
 public slots:
     void accountbook();
@@ -54,6 +56,8 @@ private slots:
     void on_todaybutton_3_clicked();
 
     void on_todaybutton_2_clicked();
+
+    void on_addprofile_clicked();
 
 private:
     Ui::Accountant *ui;

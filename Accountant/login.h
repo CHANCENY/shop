@@ -21,11 +21,13 @@ public:
     Login(QWidget *parent = nullptr);
     ~Login();
     void saveuser(QString username, QString password);
+    void writeLock(QString lock);
 
 
 
 public slots:
     void validateaccountant();
+    void lockingTimer();
 
 private slots:
     void on_pushButton_clicked();

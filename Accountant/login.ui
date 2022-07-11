@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>731</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Login</string>
+   <string>Accountant</string>
   </property>
   <property name="styleSheet">
    <string notr="true">font: 14pt &quot;Arial&quot;;
@@ -161,6 +161,19 @@ color:white;</string>
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QLabel" name="messages">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>429</y>
+       <width>371</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -168,7 +181,7 @@ color:white;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>731</width>
      <height>27</height>
     </rect>
    </property>

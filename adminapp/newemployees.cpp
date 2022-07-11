@@ -4,7 +4,7 @@
 #include <QMessageBox>
 
 
-QString profilepicture = nullptr;
+QString profilepicture;
 QString uasernamemadenow = nullptr;
 
 
@@ -55,6 +55,22 @@ bool newEmployees::firstTime(QString line)
         }
     }
     return false;
+}
+
+QString newEmployees::pictureData(QString path)
+{
+   if(path != nullptr)
+   {
+       QFile myfile(path);
+       myfile.open(QIODevice::ReadOnly);
+       if(myfile.isOpen())
+       {
+           QString data = myfile.readAll();
+           myfile.close();
+           return data;
+       }
+   }
+   return "none";
 }
 
 void newEmployees::result()

@@ -9,6 +9,7 @@ class DBCon
 public:
     DBCon();
     bool itemcon();
+    bool saverusercon();
 };
 
 #endif // DBCON_H

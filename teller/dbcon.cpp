@@ -15,3 +15,17 @@ bool DBCon::itemcon()
     }
     return false;
 }
+
+bool DBCon::saverusercon()
+{
+    QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName("saveuser.db");
+    if(mydb.open())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}

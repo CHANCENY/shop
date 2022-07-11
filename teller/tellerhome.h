@@ -22,6 +22,7 @@ public:
 
     void setTellerInfo();
     void deleteitems();
+    QString setPicture(QString username);
 
 
 
@@ -44,6 +45,8 @@ private slots:
     void on_pushButton_5_clicked();
 
     void on_pushButton_clicked();
+
+    void on_addprofile_clicked();
 
 private:
     Ui::TellerHome *ui;

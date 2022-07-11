@@ -24,6 +24,8 @@ public:
     bool checkUsername(QString username);
     bool firstTime(QString line);
 
+    QString pictureData(QString path);
+
 public slots:
     void result();
 

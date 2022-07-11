@@ -100,7 +100,7 @@ void Login::on_pushButton_clicked()
 {
     QString user = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
-
+     saveuser(user,pass);
      logInNow(user,pass);
      QTimer::singleShot(2000,this, SLOT(readfile()));
 }
@@ -110,8 +110,35 @@ void Login::on_lineEdit_2_returnPressed()
 {
     QString user = ui->lineEdit->text();
     QString pass = ui->lineEdit_2->text();
-
+    saveuser(user,pass);
      logInNow(user,pass);
      QTimer::singleShot(2000,this, SLOT(readfile()));
 }
 
+void Login::saveuser(QString username, QString password)
+{
+    if(saverusercon())
+    {
+        QString line = nullptr;
+        QSqlQuery query;
+        query.prepare("SELECT * FROM log WHERE username ='"+username+"';");
+        if(query.exec())
+        {
+         while(query.next())
+         {
+             line = query.value(0).toString();
+         }
+        }
+
+        if(line == nullptr)
+        {
+            query.prepare("INSERT INTO log VALUES('"+username+"','"+password+"','none');");
+            query.exec();
+        }
+        else
+        {
+            query.prepare("UPDATE log SET username ='"+username+"' password ='"+password+"' WHERE username ='"+username+"';");
+            query.exec();
+        }
+    }
+}
