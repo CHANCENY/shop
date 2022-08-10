@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/sty">
+        <file>style/MacOs.txt</file>
+        <file>style/file.png</file>
+        <file>style/Instruction.txt</file>
+        <file>style/start.png</file>
+        <file>style/data-processing.png</file>
+        <file>style/logo1.ico</file>
+    </qresource>
+</RCC>

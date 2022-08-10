@@ -1,0 +1,10 @@
+INSTRUCTION:
+1. Make sure you create file of txt format and select it for saving processed data
+2. You can uplad upto 5 files at once
+3. Files to be uploaded should be in .txt format
+4. Wait until the status bar disapears then you can close file app
+5. The processed data will be in file you gave as saving file
+6. The processed data contains array of object in key/pair format
+7. In saved file these array are separate by breakline (newline)
+8. Before start using them make sure you have break them at (newline)
+              

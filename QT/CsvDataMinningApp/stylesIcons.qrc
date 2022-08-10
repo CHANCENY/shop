@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/item">
+        <file>style/MacOs.txt</file>
+    </qresource>
+</RCC>
